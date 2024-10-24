@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style3.css" rel="stylesheet">
+    <title>Profile</title>
+</head>
+
+<body onload="start()">
+    <div id="w"  class="flex"><video src="w.mp4" autoplay muted loop></video></div>
+    <div id="c" class="flex">
+        <div class="bd magneto">
+            <div class="container">
+                <h4>Update Password</h4>
+                <div class="field">
+                    <label for="oldPassword" class="label">Old Password:</label>
+                    <input type="password" class="textbox" id="oldPassword" autocomplete="on">
+                </div>
+                <div class="field">
+                    <label for="newPassword" class="label">New Password:</label>
+                    <input type="password" class="textbox" id="newPassword" autocomplete="on">
+                </div>
+                <center>
+                    <button onclick="changePassword()" class="btn">Update</button>
+                </center>
+            </div>
+        </div>
+        <div class="bd magneto2">
+            <div class="container">
+                <h4>City List</h4>
+                <ul id="citiesList"></ul>
+                <div class="field">
+                    <label for="cityToDelete" class="label">Choose City:</label>
+                    <input type="text" class="textbox" id="cityToChoose" autocomplete="on">
+                </div>
+                <center>
+                    <button onclick="openCity()" class="btn">Choose</button>
+                </center>
+            </div>
+        </div>
+        <div class="bd magneto3">
+            <div class="container">
+                <h4 id="a">Update City</h4>
+                <div class="field">
+                    <label for="oldPassword" class="label">Old City:</label>
+                    <input type="text" class="textbox" id="oldCity" autocomplete="on">
+                </div>
+                <div class="field b">
+                    <label for="newPassword" class="label">New City:</label>
+                    <input type="text" class="textbox" id="newCity" autocomplete="on">
+                </div>
+                <center class="b">
+                    <button onclick="updateCity()" class="btn">Update</button>
+                </center>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="profile.js"></script>
+</body>
+
+</html>
