@@ -1,4 +1,4 @@
-const backendUrl = 'https://glowing-mink-proven.ngrok-free.app';
+const backendUrl = 'https://weather-sm-backend.vercel.app';
 
 let i= 1;
 
