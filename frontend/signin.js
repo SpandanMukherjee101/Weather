@@ -1,4 +1,4 @@
-const backendUrl = 'http://localhost:5000';
+const backendUrl = 'https://glowing-mink-proven.ngrok-free.app';
 
 const video = document.querySelector("video");
 const ld = document.querySelector(".ld");

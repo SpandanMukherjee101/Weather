@@ -8,13 +8,13 @@ const start = async () => {
     }    
 };
 
-for (let z = 0; z < 7; z++) {
+for (let z = -3; z < 7; z++) {
     const grid = document.createElement('div');
     grid.classList.add('grid');
     
-    grid.style.transform = `translateZ(${z * 30}px)`;
+    grid.style.transform = `translateZ(${z * 2}rem)`;
 
-    for (let i = 0; i < 14 * 7; i++) {
+    for (let i = 0; i < 14 * 7 ; i++) {
         const square = document.createElement('div');
         square.classList.add('square');
         grid.appendChild(square);
