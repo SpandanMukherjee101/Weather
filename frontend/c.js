@@ -4,7 +4,7 @@ const body = document.querySelector('body');
 
 const start = async () => {
     if (localStorage.getItem('token') === null) {
-        location.assign("file:///D:/Weather/frontend/signin.html");
+        location.assign("/signin.html");
     }    
 };
 

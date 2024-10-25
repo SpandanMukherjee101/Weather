@@ -87,7 +87,7 @@ img {
 }
 
 #hero {
-    background: linear-gradient(to bottom, rgba(21, 22, 24, 0.7) 70%, white 30%);
+    background: linear-gradient(to bottom, rgba(21, 22, 24, 0.7) 55%, white 55%);
     color: white;
     display: none;
     flex-direction: column;

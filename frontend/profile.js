@@ -2,7 +2,7 @@ const backendUrl = 'http://localhost:5000';
 
 const start = async () => {
     if (localStorage.getItem('token') === null) {
-        location.assign("file:///D:/Weather/frontend/signin.html")
+        location.assign("/signin.html")
     }
     else {
         const token= localStorage.getItem('token');
@@ -51,7 +51,7 @@ const changePassword = async () => {
         localStorage.removeItem('token');
         localStorage.removeItem('dc');
         alert("Plz sign-in again!");
-        location.assign("file:///D:/Weather/frontend/signin.html");
+        location.assign("/signin.html");
     } else {
         alert(data.message);
     }
@@ -83,7 +83,7 @@ const updateCity = async () => {
 const openCity= async () => {
     const City = document.getElementById('cityToChoose').value;
     localStorage.setItem('dc', City);
-    location.assign("file:///D:/Weather/frontend/index.html");
+    location.assign("/");
 }
 
 const body= document.querySelector("body");

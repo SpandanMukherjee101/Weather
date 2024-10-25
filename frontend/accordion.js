@@ -117,7 +117,7 @@ const start= async () => {
         });
     }
     else{
-        location.assign("file:///D:/Weather/frontend/signin.html");
+        location.assign("/signin.html");
     }
 }
 

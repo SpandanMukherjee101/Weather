@@ -2,6 +2,11 @@ const backendUrl = 'http://localhost:5000';
 
 const video = document.querySelector("video");
 const ld = document.querySelector(".ld");
+let vid = document.querySelector("video");
+
+function playVid() {
+    vid.play();
+}
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -12,13 +17,14 @@ const start = () => {
 
     ld.addEventListener('click', async () => {
         await sleep(750);
+        playVid();
         ld.style.display = "none";
         video.play().catch(error => {
             console.error("Autoplay was prevented:", error);
         });
 
         if (localStorage.getItem('token') !== null) {
-            location.assign("file:///D:/Weather/frontend/index.html");
+            location.assign("/");
         }
     });
 }
@@ -39,7 +45,7 @@ document.getElementById('signup').onclick = async (event) => {
         alert(data.message);
     }
     if (localStorage.getItem('token') !== null) {
-        location.assign("file:///D:/Weather/frontend/index.html")
+        location.assign("/")
     }
 };
 
@@ -66,7 +72,7 @@ document.getElementById('signin').onclick = async (event) => {
         }
     }
     if (localStorage.getItem('token') !== null) {
-        location.assign("file:///D:/Weather/frontend/index.html")
+        location.assign("/")
     }
 };
 
