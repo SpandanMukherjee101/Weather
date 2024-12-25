@@ -27,7 +27,7 @@ exports.signin = async (req, res) => {
     if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET, { expiresIn: "24000h" });
-    res.status(200).json({ result: user, token });
+    res.status(200).json({ result: token });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
