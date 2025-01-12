@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 @import url('https://fonts.cdnfonts.com/css/satoshi');
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  
-}
-
 body{
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
@@ -31,59 +24,28 @@ body{
     transform: translate( -35%, -20%);
 }
 
-body::before{
-    content: 'Welcome!';
-    font-size: 9rem;
-    color: white;
-    font-family: 'Satoshi', sans-serif;
-    display: flex;
-    align-items: center;
-    padding-left: 5rem;
-    position: absolute;
-    inset: 0;
-    background: linear-gradient( 0.25turn, rgba(0, 0, 0, 0.9) 30%, rgba(15, 21, 37, 0) 70%);
-    z-index: -1;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
 
-video{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    z-index: -2;
+.wlcm{
+    background: linear-gradient( 0.25turn, rgba(0, 0, 0, 0.9) 30%, rgba(255, 255, 255, 0) 70%);
+    font-size: 6vw;
+    font-family: 'Satoshi', sans-serif;
 }
 
 form{
-    border-radius: 20px;
-    margin-top: 150px !important;
-    width: 24% !important;
-    background-color: white !important;
-    padding: 50px;
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
 }
 
-.btn-primary{
-    width: 45%;
-    border: none;
-    border-radius: 50px;
-    margin-inline: 0.7rem;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(75,14,154,1) 35%, rgba(0,212,255,1) 100%);
-    
-}
-
-.form-control{
-    color: rgba(0,0,0,.87);
-    border-bottom-color: rgba(0,0,0,.42);
-    box-shadow: none !important;
+#email, #password{
+    box-shadow: none;
     border: none;
     border-bottom: 1px solid;
     border-radius: 4px 4px 0 0;
-    }
- h4{
-    font-size: 2rem !important;
-    font-weight: 700;
- }  
- .form-label{
-    font-weight: 800 !important;
- }
+}
+
+.btn{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(75,14,154,1) 35%, rgba(0,212,255,1) 100%);
+}
