@@ -11,17 +11,16 @@ body{
     height: 150%;
     width: 150%;
     font-family: 'Satoshi', sans-serif;
-    font-size: 12rem;
+    font-size: 10vw;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    transform: translate(0, -20rem);
     z-index: 999;
 }
 
 .ld>p{
-    transform: translate( -35%, -20%);
+    transform: translate( -25vw, -30vh);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
