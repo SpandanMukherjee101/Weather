@@ -10,7 +10,7 @@ const start = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `${token}`,
             }
         });
 
@@ -40,7 +40,7 @@ const changePassword = async () => {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `${token}`,
         },
         body: JSON.stringify({ oldPassword, newPassword }),
     });
@@ -66,7 +66,7 @@ const updateCity = async () => {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `${token}`,
         },
         body: JSON.stringify({ oldCity, newCity }),
     });
