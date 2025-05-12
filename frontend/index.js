@@ -1,4 +1,4 @@
-const backendUrl = 'https://weather-sm-backend.vercel.app';
+const backendUrl = 'https://weather-sm-backend.vercel.app/';
 
 let i= 1;
 
@@ -117,7 +117,7 @@ const start= async () => {
         });
     }
     else{
-        location.assign("/signin.html");
+        location.assign("signin.html");
     }
 }
 

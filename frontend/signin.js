@@ -1,4 +1,4 @@
-const backendUrl = 'https://weather-sm-backend.vercel.app';
+const backendUrl = 'https://weather-sm-backend.vercel.app/';
 
 const video = document.querySelector("video");
 const ld = document.querySelector(".ld");
@@ -62,9 +62,9 @@ document.getElementById('signin').onclick = async (event) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
         });
-        const data = await response.json();
-        token = data.token;
-        if (response.ok) {
+        const data = await response.json();        
+        token = data.result;
+        if (response.ok) {            
             localStorage.setItem('token', token);
             alert('Sign in successful!');
         } else {
