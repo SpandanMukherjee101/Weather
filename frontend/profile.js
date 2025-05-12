@@ -1,4 +1,4 @@
-const backendUrl = 'https://weather-sm-backend.vercel.app/';
+const backendUrl = 'https://weather-sm-backend.vercel.app';
 
 const start = async () => {
     if (localStorage.getItem('token') === null) {
