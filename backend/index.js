@@ -18,5 +18,5 @@ app.use('/user', userRoutes)
 app.use('/weather', weatherRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => app.listen(5000, () => console.log("Server running on port 5000")))
+  .then(() => app.listen(3000, () => console.log("Server running on port 3000")))
   .catch(err => console.error(err));
