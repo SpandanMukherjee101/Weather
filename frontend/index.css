@@ -87,12 +87,12 @@ img {
 }
 
 #hero {
-    background: linear-gradient(to bottom, rgba(21, 22, 24, 0.7) 55%, white 55%);
     color: white;
     display: none;
     flex-direction: column;
     gap: 4rem;
     overflow: hidden;
+    margin-top: 2vh;
 }
 
 #hero ul {
@@ -109,6 +109,7 @@ video{
     width: 100%;
     object-fit: cover;
     z-index: -2;
+    filter: brightness(0.3);
 }
 
 #main-header {
@@ -234,7 +235,7 @@ video{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 30rem;
+    min-height: 22rem;
     flex: 0 0 10rem;
     cursor: pointer;
     position: relative;
