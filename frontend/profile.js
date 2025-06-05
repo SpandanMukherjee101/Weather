@@ -1,4 +1,4 @@
-const backendUrl = 'http://13.60.19.80:3000';
+const backendUrl = 'https://io-copy-seller-associates.trycloudflare.com';
 
 const start = async () => {
     if (localStorage.getItem('token') === null) {
