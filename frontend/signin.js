@@ -1,4 +1,4 @@
-const backendUrl = 'https://weather-sm-backend.vercel.app';
+const backendUrl = 'http://13.60.19.80:3000';
 
 const video = document.querySelector("video");
 const ld = document.querySelector(".ld");
