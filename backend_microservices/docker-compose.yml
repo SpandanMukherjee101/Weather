@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-service
+      - user-service
+      - weather-service
+    environment:
+      - PORT=3000
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb+srv://spandan:no4nyktt7dMLZLK0@weather-microservices.vjdf62c.mongodb.net/?retryWrites=true&w=majority&appName=weather-microservices
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGO_URI=mongodb+srv://spandan:no4nyktt7dMLZLK0@weather-microservices.vjdf62c.mongodb.net/?retryWrites=true&w=majority&appName=weather-microservices
+
+  weather-service:
+    build: ./weather-service
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - MONGO_URI=mongodb+srv://spandan:no4nyktt7dMLZLK0@weather-microservices.vjdf62c.mongodb.net/?retryWrites=true&w=majority&appName=weather-microservices
