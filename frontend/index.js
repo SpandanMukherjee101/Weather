@@ -68,11 +68,13 @@ const start= async () => {
         const d = new Date();
         i= d.getDay();
         const nextDate = new Date(d);
+        let j= 1;
         dates.forEach(item => {
             item.children[0].innerText= day[i];
             item.children[1].innerText= nextDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
             i= (i+1)%7;
-            nextDate.setDate(d.getDate() + 1);
+            nextDate.setDate(d.getDate() + j);
+            j++;
         })
         
         let temp = document.querySelectorAll('.accordion--item .temp');
