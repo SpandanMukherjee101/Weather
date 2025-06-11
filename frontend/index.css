@@ -91,7 +91,7 @@ img {
     color: white;
     display: none;
     flex-direction: column;
-    gap: 9vhx;
+    gap: 9vh;
     overflow: hidden;
     margin-top: 2vh;
 }
