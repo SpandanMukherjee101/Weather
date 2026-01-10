@@ -1,4 +1,4 @@
-const backendUrl = 'https://io-copy-seller-associates.trycloudflare.com';
+const backendUrl = 'https://weather-sm-backend.vercel.app';
 
 let i= 1;
 
