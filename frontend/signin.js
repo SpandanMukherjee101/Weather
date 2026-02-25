@@ -31,8 +31,12 @@ const start = () => {
 
 document.getElementById('signup').onclick = async (event) => {
     event.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!email || !password) {
+        return alert("Input fields cannot be empty!");
+    }
     const response = await fetch(`${backendUrl}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -55,8 +59,12 @@ document.getElementById('signin').onclick = async (event) => {
         alert('User is signed-in!');
     }
     else {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email || !password) {
+            return alert("Input fields cannot be empty!");
+        }
         const response = await fetch(`${backendUrl}/auth/signin`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -5,7 +5,7 @@ const start = async () => {
         location.assign("signin.html")
     }
     else {
-        const token= localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         const response = await fetch(`${backendUrl}/user/cities`, {
             method: 'GET',
             headers: {
@@ -19,7 +19,7 @@ const start = async () => {
         if (response.ok) {
             const citiesList = document.getElementById('citiesList');
             citiesList.innerHTML = '';
-    
+
             data.cities.forEach(city => {
                 const li = document.createElement('li');
                 li.textContent = city;
@@ -32,8 +32,12 @@ const start = async () => {
 };
 
 const changePassword = async () => {
-    const oldPassword = document.getElementById('oldPassword').value;
-    const newPassword = document.getElementById('newPassword').value;
+    const oldPassword = document.getElementById('oldPassword').value.trim();
+    const newPassword = document.getElementById('newPassword').value.trim();
+
+    if (!oldPassword || !newPassword) {
+        return alert("Input fields cannot be empty!");
+    }
     const token = localStorage.getItem('token');
 
     const response = await fetch(`${backendUrl}/auth/change-password`, {
@@ -58,8 +62,12 @@ const changePassword = async () => {
 };
 
 const updateCity = async () => {
-    const oldCity = document.getElementById('oldCity').value;
-    const newCity = document.getElementById('newCity').value;
+    const oldCity = document.getElementById('oldCity').value.trim();
+    const newCity = document.getElementById('newCity').value.trim();
+
+    if (!oldCity || !newCity) {
+        return alert("Input fields cannot be empty!");
+    }
     const token = localStorage.getItem('token');
 
     const response = await fetch(`${backendUrl}/weather/update-city`, {
@@ -70,7 +78,7 @@ const updateCity = async () => {
         },
         body: JSON.stringify({ oldCity, newCity }),
     });
-    console.log(response);    
+    console.log(response);
     const data = await response.json();
     if (response.ok) {
         alert('City updated successfully!');
@@ -80,13 +88,17 @@ const updateCity = async () => {
     }
 };
 
-const openCity= async () => {
-    const City = document.getElementById('cityToChoose').value;
+const openCity = async () => {
+    const City = document.getElementById('cityToChoose').value.trim();
+
+    if (!City) {
+        return alert("Input fields cannot be empty!");
+    }
     localStorage.setItem('dc', City);
     location.assign("/");
 }
 
-const body= document.querySelector("body");
+const body = document.querySelector("body");
 
 const mag = document.querySelector(".magneto");
 
