@@ -362,3 +362,60 @@ video {
     opacity: 0;
     transform: translate3d(0, 2rem, 0);
 }
+
+@media screen and (max-width: 768px) {
+    #main-header {
+        padding: 1rem;
+    }
+    
+    #hero {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding-bottom: 2rem;
+    }
+    
+    #hero .accordion {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .accordion--item {
+        width: 100%;
+        max-width: 90vw;
+        flex: 0 0 10rem;
+        min-height: 12rem;
+    }
+
+    .opened {
+        flex-basis: auto;
+        min-height: 32rem;
+        background-size: cover;
+    }
+
+    .accordion--item:hover:not(.opened) {
+        background-size: cover;
+        padding: 2rem;
+    }
+
+    .opened .readings {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .readings li {
+        width: 30%;
+        padding: 0.5rem;
+    }
+    
+    #page-title h1 {
+        font-size: 2rem;
+    }
+    
+    #page-title p {
+        font-size: 1.2rem;
+    }
+}
