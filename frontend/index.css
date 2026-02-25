@@ -247,12 +247,12 @@ video {
 }
 
 .accordion--item:hover {
-    transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.05, 1.05, 1);
 }
 
 .accordion--item:hover:not(.opened) {
     background-size: 32rem;
-    transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.05, 1.05, 1);
     padding: 3rem;
     z-index: 2;
 }
