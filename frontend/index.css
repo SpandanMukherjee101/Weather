@@ -138,7 +138,7 @@ video {
     display: none;
     position: absolute;
     flex-direction: column;
-    height: 8rem;
+    height: 10rem;
     width: 5rem;
     gap: 2rem;
     background-color: rgba(0, 0, 0, 0.65);
