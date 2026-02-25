@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: ['https://weather-sm.vercel.app', 'http://localhost:5000'],
+  origin: 'https://weather-sm.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
