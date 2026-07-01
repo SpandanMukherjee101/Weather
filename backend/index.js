@@ -1,10 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const weatherRoutes = require('./routes/weather');
+const { connectToDatabase } = require('./utils/dbConnection');
 
 dotenv.config();
 
@@ -36,7 +36,14 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => res.json({ message: 'Weather API is running' }));
-app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
+app.get('/health', async (req, res) => {
+  try {
+    await connectToDatabase();
+    res.status(200).json({ status: 'ok' });
+  } catch (error) {
+    res.status(503).json({ status: 'db-unavailable', message: error.message });
+  }
+});
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/weather', weatherRoutes);
@@ -52,17 +59,6 @@ app.use((err, req, res, next) => {
     message: err.message || 'Internal server error',
   });
 });
-
-const connectToDatabase = async () => {
-  if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI is not defined');
-  }
-
-  return mongoose.connect(process.env.MONGO_URI, {
-    serverSelectionTimeoutMS: 5000,
-    maxPoolSize: 10,
-  });
-};
 
 const startServer = async () => {
   try {
