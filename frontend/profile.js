@@ -1,33 +1,57 @@
-const backendUrl = 'https://weather-sm-backend.vercel.app';
+const backendUrl = (() => {
+    const host = window.location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') {
+        return 'http://localhost:3000';
+    }
+    return 'https://weather-sm-backend.vercel.app';
+})();
+
+function getAuthHeaders() {
+    const headers = { 'Content-Type': 'application/json' };
+    const token = localStorage.getItem('token');
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+    return headers;
+}
+
+async function readJson(response) {
+    try {
+        return await response.json();
+    } catch (error) {
+        return {};
+    }
+}
 
 const start = async () => {
     if (localStorage.getItem('token') === null) {
-        location.assign("signin.html")
+        location.assign('signin.html');
+        return;
     }
-    else {
-        const token = localStorage.getItem('token');
+
+    try {
         const response = await fetch(`${backendUrl}/user/cities`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `${token}`,
-            }
+            headers: getAuthHeaders()
         });
 
-        const data = await response.json();
+        const data = await readJson(response);
+        if (!response.ok) {
+            throw new Error(data.message || 'Error fetching cities');
+        }
 
-        if (response.ok) {
-            const citiesList = document.getElementById('citiesList');
+        const citiesList = document.getElementById('citiesList');
+        if (citiesList) {
             citiesList.innerHTML = '';
-
-            data.cities.forEach(city => {
+            (data.cities || []).forEach((city) => {
                 const li = document.createElement('li');
                 li.textContent = city;
                 citiesList.appendChild(li);
             });
-        } else {
-            alert(data.message || 'Error fetching cities');
         }
+    } catch (error) {
+        console.error(error);
+        alert(error.message || 'Could not load cities');
     }
 };
 
@@ -36,28 +60,35 @@ const changePassword = async () => {
     const newPassword = document.getElementById('newPassword').value.trim();
 
     if (!oldPassword || !newPassword) {
-        return alert("Input fields cannot be empty!");
+        return alert('Input fields cannot be empty!');
     }
+
     const token = localStorage.getItem('token');
+    if (!token) {
+        location.assign('signin.html');
+        return;
+    }
 
-    const response = await fetch(`${backendUrl}/auth/change-password`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `${token}`,
-        },
-        body: JSON.stringify({ oldPassword, newPassword }),
-    });
+    try {
+        const response = await fetch(`${backendUrl}/auth/change-password`, {
+            method: 'PUT',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ oldPassword, newPassword })
+        });
 
-    const data = await response.json();
-    if (response.ok) {
+        const data = await readJson(response);
+        if (!response.ok) {
+            throw new Error(data.message || 'Could not update password');
+        }
+
         alert('Password updated successfully!');
         localStorage.removeItem('token');
         localStorage.removeItem('dc');
-        alert("Plz sign-in again!");
-        location.assign("/signin.html");
-    } else {
-        alert(data.message);
+        alert('Please sign in again!');
+        location.assign('signin.html');
+    } catch (error) {
+        console.error(error);
+        alert(error.message || 'Could not update password');
     }
 };
 
@@ -66,43 +97,56 @@ const updateCity = async () => {
     const newCity = document.getElementById('newCity').value.trim();
 
     if (!oldCity || !newCity) {
-        return alert("Input fields cannot be empty!");
+        return alert('Input fields cannot be empty!');
     }
-    const token = localStorage.getItem('token');
 
-    const response = await fetch(`${backendUrl}/weather/update-city`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `${token}`,
-        },
-        body: JSON.stringify({ oldCity, newCity }),
-    });
-    console.log(response);
-    const data = await response.json();
-    if (response.ok) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        location.assign('signin.html');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${backendUrl}/weather/update-city`, {
+            method: 'PUT',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ oldCity, newCity })
+        });
+
+        const data = await readJson(response);
+        if (!response.ok) {
+            throw new Error(data.message || 'Could not update city');
+        }
+
         alert('City updated successfully!');
         location.reload();
-    } else {
-        alert(data.message);
+    } catch (error) {
+        console.error(error);
+        alert(error.message || 'Could not update city');
     }
 };
 
 const openCity = async () => {
-    const City = document.getElementById('cityToChoose').value.trim();
+    const city = document.getElementById('cityToChoose').value.trim();
 
-    if (!City) {
-        return alert("Input fields cannot be empty!");
+    if (!city) {
+        return alert('Input fields cannot be empty!');
     }
-    localStorage.setItem('dc', City);
-    location.assign("/");
-}
 
-const body = document.querySelector("body");
+    localStorage.setItem('dc', city);
+    location.assign('/');
+};
 
-const mag = document.querySelector(".magneto");
+const body = document.querySelector('body');
+const mag = document.querySelector('.magneto');
+const mag2 = document.querySelector('.magneto2');
+const mag3 = document.querySelector('.magneto3');
 
 const activate = (event) => {
+    if (!mag || !mag2) {
+        return;
+    }
+
     let boundBox = mag2.getBoundingClientRect();
     const magstr = 10;
     const newX = ((event.clientX - boundBox.left) / mag2.offsetWidth) - 0.5;
@@ -116,9 +160,11 @@ const activate = (event) => {
     });
 };
 
-const mag2 = document.querySelector(".magneto2");
-
 const activate2 = (event) => {
+    if (!mag2) {
+        return;
+    }
+
     let boundBox = mag2.getBoundingClientRect();
     const magstr = 10;
     const newX = ((event.clientX - boundBox.left) / mag2.offsetWidth) - 0.5;
@@ -132,9 +178,11 @@ const activate2 = (event) => {
     });
 };
 
-const mag3 = document.querySelector(".magneto3");
-
 const activate3 = (event) => {
+    if (!mag3 || !mag2) {
+        return;
+    }
+
     let boundBox = mag2.getBoundingClientRect();
     const magstr = 10;
     const newX = ((event.clientX - boundBox.left) / mag2.offsetWidth) - 0.5;
@@ -148,6 +196,8 @@ const activate3 = (event) => {
     });
 };
 
-body.addEventListener('mousemove', activate);
-body.addEventListener('mousemove', activate2);
-body.addEventListener('mousemove', activate3);
+if (body) {
+    body.addEventListener('mousemove', activate);
+    body.addEventListener('mousemove', activate2);
+    body.addEventListener('mousemove', activate3);
+}
