@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { getJwtSecret } = require('../utils/authConfig');
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -8,12 +9,8 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: 'No token provided' });
   }
 
-  if (!process.env.JWT_SECRET) {
-    return res.status(500).json({ message: 'Server configuration error' });
-  }
-
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
+    const decoded = jwt.verify(token, getJwtSecret(), { algorithms: ['HS256'] });
     req.userId = decoded.id;
     next();
   } catch (error) {

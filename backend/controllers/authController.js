@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { getJwtSecret } = require('../utils/authConfig');
 const { normalizeText, isValidEmail, isStrongPassword } = require('../utils/validation');
 
 exports.signup = async (req, res, next) => {
@@ -52,11 +53,7 @@ exports.signin = async (req, res, next) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    if (!process.env.JWT_SECRET) {
-      return res.status(500).json({ message: 'Server configuration error' });
-    }
-
-    const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign({ email: user.email, id: user._id }, getJwtSecret(), { expiresIn: '24h' });
     res.status(200).json({ result: token, user: { id: user._id, email: user.email } });
   } catch (error) {
     next(error);
