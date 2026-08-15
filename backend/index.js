@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const cron = require('node-cron');
+const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const weatherRoutes = require('./routes/weather');
@@ -58,6 +60,21 @@ app.use((err, req, res, next) => {
   res.status(statusCode).json({
     message: err.message || 'Internal server error',
   });
+});
+
+// Run a cron job every day at midnight to ping the database
+cron.schedule('0 0 * * *', async () => {
+  try {
+    await connectToDatabase();
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.db.admin().ping();
+      console.log('Database pinged successfully via cron job');
+    } else {
+      console.error('Database is not connected during cron job ping');
+    }
+  } catch (error) {
+    console.error('Database ping failed during cron job:', error.message);
+  }
 });
 
 const startServer = async () => {
