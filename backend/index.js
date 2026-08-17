@@ -46,6 +46,17 @@ app.get('/health', async (req, res) => {
     res.status(503).json({ status: 'db-unavailable', message: error.message });
   }
 });
+
+// Ensure database connection for all routes (crucial for serverless environments like Vercel)
+app.use(async (req, res, next) => {
+  try {
+    await connectToDatabase();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/weather', weatherRoutes);
